@@ -1,12 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import faker from "faker";
+
+faker.seed(10);
+const DATA = [...Array(30).keys()].map((_, idx) => {
+  return {
+    key: faker.datatype.uuid(),
+    image: `https://randomuser.me/api/portraits/${faker.helpers.randomize([
+      "women",
+      "men",
+    ])}/${faker.datatype.number(60)}.jpg`,
+    name: faker.name.findName(),
+    ocupation: faker.name.jobTitle(),
+    email: faker.internet.email(),
+  };
+});
+
+const SPACING = 20;
+const AVATAR_SIZE = 70;
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" hidden />
     </View>
   );
 }
@@ -14,8 +31,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
   },
 });
